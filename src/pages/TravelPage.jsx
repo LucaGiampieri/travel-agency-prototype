@@ -26,29 +26,60 @@ function TravelPage() {
     return (
 
         <>
-            <input
-                name="name"
-                type="text"
-                placeholder="Chi stai cercando?"
-                onChange={setFieldValue}
+            <div className="d-flex justify-content-center">
+                <input
+                    className="form-search"
+                    name="name"
+                    type="text"
+                    placeholder="Chi stai cercando?"
+                    onChange={setFieldValue}
 
-            />
-            <ul>
+                />
+            </div>
+            <div className="accordion accordion-flush container accordion-container" id="accordionFlushExample">
+
                 {
                     partecipantiFiltrati.map((part, index) => {
-                        return (
-                            <li key={index}>
-                                <strong>Nome: {part.nome} {part.cognome}</strong>
-                                <div>Telefono: {part.telefono}</div>
-                                <div>Email: {part.email}</div>
 
-                            </li>
-                        )
+                        const collapseId = `flush-collapse-${index}`;
+
+                        return (
+                            <div key={index} className="accordion-item">
+                                <h2 className="accordion-header">
+                                    <button
+                                        className="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target={`#${collapseId}`}
+                                        aria-expanded="false"
+                                        aria-controls={collapseId}
+                                    >
+                                        {part.nome} {part.cognome}
+                                    </button>
+
+                                </h2>
+                                <div
+                                    id={collapseId}
+                                    className="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample"
+                                >
+                                    <div className="accordion-body">
+                                        {part.telefono}
+                                    </div>
+                                    <div className="accordion-body">
+                                        {part.email}
+                                    </div>
+                                </div>
+                            </div>
+                        );
                     })
                 }
 
-            </ul>
+            </div>
 
+            <div className="d-flex justify-content-center">
+                <Link className="home-link" to={"/"}>Torna alla home</Link>
+            </div>
         </>
 
     )
