@@ -14,14 +14,14 @@ function TravelPage() {
 
     const [formData, setFormData] = useState("");
 
-
     function setFieldValue(e) {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        })
+        setFormData(e.target.value)
     }
 
+    const partecipantiFiltrati =
+        partecipantiViaggio.partecipanti.filter(part =>
+            `${part.nome} ${part.cognome}`.toLowerCase().includes(formData.toLowerCase())
+        );
 
     return (
 
@@ -33,26 +33,20 @@ function TravelPage() {
                 onChange={setFieldValue}
 
             />
-
-
-
-
-
             <ul>
-                {partecipantiViaggio.partecipanti.nome.filter(partName => {
-                    if (partName === formData)
+                {
+                    partecipantiFiltrati.map((part, index) => {
                         return (
-                            partecipantiViaggio.partecipanti.map((part, index) => {
-                                return (
-                                    <li key={index}>
-                                        <strong>Nome: {part.nome} {part.cognome}</strong>
-                                        <div>Telefono: {part.telefono}</div>
-                                        <div>Email: {part.email}</div>
+                            <li key={index}>
+                                <strong>Nome: {part.nome} {part.cognome}</strong>
+                                <div>Telefono: {part.telefono}</div>
+                                <div>Email: {part.email}</div>
 
-                                    </li>
-                                )
-                            }))
-                })}
+                            </li>
+                        )
+                    })
+                }
+
             </ul>
 
         </>
