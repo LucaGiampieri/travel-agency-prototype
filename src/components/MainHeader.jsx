@@ -2,9 +2,9 @@
 function MainHeader() {
 
     return (
-        <>
-            <h1>Ciaoooooooooooooo</h1>
-        </>
+        <header>
+            <img src="./../src/assets/logo5.png" alt="Travel Logo" />
+        </header>
     )
 }
 
